@@ -103,12 +103,36 @@
     .btn-secondary:hover {
       background-color: #d1d5db;
     }
+
+    .error-list {
+      list-style: none;
+      background-color: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      border-radius: 7px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .error-list li {
+      color: #dc2626;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    input.input-error {
+      border-color: #f87171;
+    }
   </style>
 </head>
 <body>
 
   <div class="form-container">
     <h1>✉️ <%= title %></h1>
+
+    <%- include("partials/errors.ejs") %>
 
     <form method="POST" action="/new">
 
@@ -119,7 +143,7 @@
           id="messageUser"
           name="messageUser"
           placeholder="Ej: Amando"
-          required
+          value="<%= locals.data ? data.messageUser || '' : '' %>"
           autocomplete="off"
         />
       </div>
@@ -131,7 +155,7 @@
           id="messageText"
           name="messageText"
           placeholder="Escribe tu mensaje aquí..."
-          required
+          value="<%= locals.data ? data.messageText || '' : '' %>"
           autocomplete="off"
         />
       </div>

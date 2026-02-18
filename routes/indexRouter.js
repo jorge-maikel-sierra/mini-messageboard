@@ -1,69 +1,21 @@
 const express = require("express");
 const router = express.Router();
-
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date(),
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const messagesController = require("../controllers/messagesController");
 
 // GET / - Lista de mensajes
-router.get("/", (req, res) => {
-  res.render("index", {
-    title: "Mini Messageboard",
-    messages: messages,
-  });
-});
+router.get("/", messagesController.indexGet);
 
 // GET /new - Formulario para nuevo mensaje
-router.get("/new", (req, res) => {
-  res.render("form", {
-    title: "Nuevo Mensaje",
-  });
-});
+router.get("/new", messagesController.newGet);
 
-// POST /new - Crear nuevo mensaje
-router.post("/new", (req, res) => {
-  const { messageUser, messageText } = req.body;
+// POST /new - Crear nuevo mensaje (con validación)
+router.post("/new", messagesController.newPost);
 
-  if (!messageUser || !messageText) {
-    return res.status(400).send("El usuario y el texto del mensaje son requeridos.");
-  }
-
-  messages.push({
-    text: messageText,
-    user: messageUser,
-    added: new Date(),
-  });
-
-  res.redirect("/");
-});
+// GET /search - Buscar mensajes
+router.get("/search", messagesController.searchGet);
 
 // GET /messages/:id - Detalle de un mensaje
-router.get("/messages/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (isNaN(id) || id < 0 || id >= messages.length) {
-    return res.status(404).render("index", {
-      title: "Mensaje no encontrado",
-      messages: [],
-    });
-  }
-
-  const message = messages[id];
-
-  res.render("message", {
-    title: "Detalle del Mensaje",
-    message: message,
-    id: id,
-  });
-});
+router.get("/messages/:id", messagesController.messageGet);
 
 module.exports = router;
+

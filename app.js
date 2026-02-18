@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("¡Algo salió mal! Error interno del servidor.");
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Mini Messageboard corriendo en http://localhost:${PORT}`);
 });

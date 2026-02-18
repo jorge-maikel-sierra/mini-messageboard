@@ -106,6 +106,25 @@
       font-size: 0.8rem;
       color: #9ca3af;
     }
+
+    .search-bar {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-bar input[type="text"] {
+      flex: 1;
+      padding: 0.6rem 0.9rem;
+      border: 1.5px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-bar input[type="text"]:focus {
+      border-color: #4f46e5;
+    }
   </style>
 </head>
 <body>
@@ -115,21 +134,32 @@
     <a href="/new" class="btn btn-primary">+ Nuevo mensaje</a>
   </header>
 
+  <form action="/search" method="GET" class="search-bar">
+    <input
+      type="text"
+      name="q"
+      placeholder="Buscar mensajes por usuario o texto..."
+      autocomplete="off"
+    />
+    <button type="submit" class="btn btn-secondary">🔍 Buscar</button>
+  </form>
+
   <main>
+    <%- include("partials/errors.ejs") %>
     <% if (messages.length === 0) { %>
       <div class="empty-state">
         <p>No hay mensajes todavía. ¡Sé el primero en escribir!</p>
       </div>
     <% } else { %>
       <div class="messages-list">
-        <% messages.forEach(function(message, index) { %>
+        <% messages.forEach(function(message) { %>
           <div class="message-card">
             <div class="message-info">
               <p class="message-user">👤 <%= message.user %></p>
               <p class="message-text"><%= message.text %></p>
               <p class="message-date">🕒 <%= message.added.toLocaleString("es-ES") %></p>
             </div>
-            <a href="/messages/<%= index %>" class="btn btn-secondary">Abrir</a>
+            <a href="/messages/<%= message.id %>" class="btn btn-secondary">Abrir</a>
           </div>
         <% }) %>
       </div>
