@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 560px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .detail-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+    }
+
+    .detail-value {
+      font-size: 1.05rem;
+      color: #111827;
+    }
+
+    .detail-value.user {
+      color: #4f46e5;
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #ede9fe;
+      color: #4f46e5;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+
+    .actions {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.4rem;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-secondary {
+      background-color: #e5e7eb;
+      color: #374151;
+    }
+
+    .btn-secondary:hover {
+      background-color: #d1d5db;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>💬 <%= title %></h1>
+
+    <span class="badge">Mensaje #<%= id %></span>
+
+    <div class="detail-row">
+      <span class="detail-label">👤 Usuario</span>
+      <span class="detail-value user"><%= message.user %></span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">✉️ Mensaje</span>
+      <span class="detail-value"><%= message.text %></span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">🕒 Publicado el</span>
+      <span class="detail-value"><%= message.added.toLocaleString("es-ES") %></span>
+    </div>
+
+    <div class="actions">
+      <a href="/" class="btn btn-secondary">← Volver al inicio</a>
+    </div>
+  </div>
+
+</body>
+</html>
